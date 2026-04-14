@@ -6,17 +6,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const medicineRoutes = require("./routes/medicines");
-const orderRoutes = require("./routes/orders");
+app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/medicines", require("./routes/medicineRoutes"));
+app.use("/api/cart", require("./routes/cartRoutes"));
+app.use("/api/orders", require("./routes/orderRoutes"));
+app.use("/api/donations", require("./routes/donationRoutes"));
 
-// API routes
-app.use("/api/medicines", medicineRoutes);
-app.use("/api/orders", orderRoutes);
-
-app.get("/", (req, res) => {
-  res.send("Backend is running");
-});
-
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
-});
+app.listen(5000, () => console.log("Server running on port 5000"));
